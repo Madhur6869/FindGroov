@@ -16,7 +16,7 @@
   <body>
     <div class="nav d-flex justify-content-between p-3">
       <h3 class=""><b>GroovFind</b></h3>
-      <h3 class="">Good Morning</h3>
+      <h3 id="Greetings"class="">Good Morning</h3>
     </div>
     <div class="info">
       <span class="title">GroovFind</span> <br>
@@ -32,4 +32,19 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"
   ></script>
+  <script>
+    let myDate = new Date();
+    let hrs = myDate.getHours();
+
+    let greet;
+
+    if (hrs < 12)
+        greet = 'Good Morning';
+    else if (hrs >= 12 && hrs <= 17)
+        greet = 'Good Afternoon';
+    else if (hrs >= 17 && hrs <= 24)
+        greet = 'Good Evening';
+
+    document.getElementById('Greetings').innerHTML = greet;
+</script>
 </html>
