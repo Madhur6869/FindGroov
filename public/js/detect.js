@@ -32,6 +32,7 @@ function startVideo() {
 let count = 0;
 let exp_prob= []
 const avg=[]
+const detected_emo;
 // MAX INDEX OF ARRAY
 function indexOfMax(arr) {
   if (arr.length === 0) {
@@ -66,6 +67,7 @@ video.addEventListener("play", async () => {
     faceapi.draw.drawDetections(canvas, resizedDetections);
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
     faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+    // console.log('detections:',detections)
 
     if (detections) {
       const exp = detections[0].expressions;     
@@ -81,39 +83,41 @@ video.addEventListener("play", async () => {
   }, 100);
   setTimeout(() => {
     clearInterval(s);
-      avg[0]= exp_prob[0]/count
-      avg[1]= exp_prob[1]/count
-      avg[2]= exp_prob[2]/count
-      avg[3]= exp_prob[3]/count
-      avg[4]= exp_prob[4]/count
-      avg[5]= exp_prob[5]/count
-      avg[6]= exp_prob[6]/count
+    const avg =exp_prob.map(x => x/count);
       console.log(avg);
       const exp_index=indexOfMax(avg);
       switch(exp_index) {
         case 0:
           console.log('Angry')
+          detected_emo='Angry'
           break;
         case 1:
           console.log('Disgusted')
+          detected_emo='Disgusted'
           break;
         case 2:
           console.log('fearful')
+          detected_emo='fearful'
           break;
         case 3:
           console.log('Happy')
+          detected_emo='Happy'
           break;
         case 4:
           console.log('Neutral')
+          detected_emo='Neutral'
           break;
         case 5:
           console.log('Sad')
+          detected_emo='Sad'
           break;
         case 6:
           console.log('Surprised')
+          detected_emo='Surprised'
           break;
         default:
           console.log('Detect again')
+          detected_emo='Detect again'
       }
       
   }, 3000);
