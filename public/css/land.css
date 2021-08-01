@@ -2,6 +2,25 @@
 
 body {
   background-color: #6f00fc;
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+     }
+}
+
+a{
+  text-decoration: none;
+  color: #121212;
+}
+a:hover{
+  color: #121212;
 }
 
 .title {
@@ -45,6 +64,19 @@ font-style: normal;
 font-weight: normal;
 font-size: 20px;
 line-height: 32px;
+}
+.button {
+  padding: 1%;
+  font-size: 30px;
+  background-color: #fff;
+  color: black !important;
+  margin-top: 500px;
+  margin-left: 7.2em;
+  margin-right: auto;
+  width: max-content;
+  border-radius: 30px;
+  cursor: pointer;
+  position: fixed;
 }
 
 .mobile {
