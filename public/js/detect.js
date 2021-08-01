@@ -32,7 +32,7 @@ function startVideo() {
 let count = 0;
 let exp_prob= []
 const avg=[]
-const detected_emo;
+let detected_emo='';
 // MAX INDEX OF ARRAY
 function indexOfMax(arr) {
   if (arr.length === 0) {
@@ -67,8 +67,6 @@ video.addEventListener("play", async () => {
   /*  faceapi.draw.drawDetections(canvas, resizedDetections);
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
     faceapi.draw.drawFaceExpressions(canvas, resizedDetections); */
-    // console.log('detections:',detections)
-
     if (detections) {
       const exp = detections[0].expressions;
       exp_prob[0]= exp.angry;

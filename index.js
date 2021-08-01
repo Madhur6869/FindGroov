@@ -17,6 +17,9 @@ app.get("/find", (req, res) => {
 app.get("/detect", (req, res) => {
   res.render("detect.ejs");
 });
+app.get("/found", (req, res) => {
+  res.render("found.ejs");
+});
 
 app.listen(port, () => {
   console.log("Serving on port 3000");
