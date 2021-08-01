@@ -1,5 +1,6 @@
 const video = document.getElementById("video");
-const emo=document.getElementsByClassName("emotion")
+const emo = document.getElementsByClassName("emotion");
+const info= document.getElementsByClassName("info");
 var constraints = { audio: false, video: { width: 1280, height: 720 } };
 // Initiate model
 Promise.all([
@@ -30,30 +31,30 @@ function startVideo() {
     });
 }
 let count = 0;
-let exp_prob= []
-const avg=[]
-let detected_emo='';
+let exp_prob = [];
+const avg = [];
+let detected_emo = "";
 // MAX INDEX OF ARRAY
 function indexOfMax(arr) {
   if (arr.length === 0) {
-      return -1;
+    return -1;
   }
   var max = arr[0];
   var maxIndex = 0;
   for (var i = 1; i < arr.length; i++) {
-      if (arr[i] > max) {
-          maxIndex = i;
-          max = arr[i];
-      }
+    if (arr[i] > max) {
+      maxIndex = i;
+      max = arr[i];
+    }
   }
   return maxIndex;
 }
 // Live recognition
 video.addEventListener("play", async () => {
-  const canvas = await faceapi.createCanvasFromMedia(video);
-  document.body.append(canvas);
+  // const canvas = await faceapi.createCanvasFromMedia(video);
+  // document.body.append(canvas);
   const displaySize = { width: video.width, height: video.height };
-  faceapi.matchDimensions(canvas, displaySize);
+  // faceapi.matchDimensions(canvas, displaySize);
   var s = setInterval(async () => {
     const detections = await faceapi
       .detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
@@ -63,17 +64,17 @@ video.addEventListener("play", async () => {
       detections,
       displaySize
     );
-    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-  /*  faceapi.draw.drawDetections(canvas, resizedDetections);
-    faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-    faceapi.draw.drawFaceExpressions(canvas, resizedDetections); */
+    // canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+    // faceapi.draw.drawDetections(canvas, resizedDetections);
+    // faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
+    // faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
     if (detections) {
       const exp = detections[0].expressions;
-      exp_prob[0]= exp.angry;
-      exp_prob[1]= exp.disgusted;
-      exp_prob[2]= exp.fearful;
-      exp_prob[3]= exp.happy;
-      exp_prob[4]= exp.neutral;
+      exp_prob[0] = exp.angry;
+      exp_prob[1] = exp.disgusted;
+      exp_prob[2] = exp.fearful;
+      exp_prob[3] = exp.happy;
+      exp_prob[4] = exp.neutral;
       exp_prob[5] = exp.sad;
       exp_prob[6] = exp.surprised;
       count += 1;
@@ -81,42 +82,43 @@ video.addEventListener("play", async () => {
   }, 100);
   setTimeout(() => {
     clearInterval(s);
-    const avg =exp_prob.map(x => x/count);
-      console.log(avg);
-      const exp_index=indexOfMax(avg);
-      switch(exp_index) {
-        case 0:
-          console.log('Angry')
-          detected_emo='Angry'
-          break;
-        case 1:
-          console.log('Disgusted')
-          detected_emo='Disgusted'
-          break;
-        case 2:
-          console.log('fearful')
-          detected_emo='fearful'
-          break;
-        case 3:
-          console.log('Happy')
-          detected_emo='Happy'
-          break;
-        case 4:
-          console.log('Neutral')
-          detected_emo='Neutral'
-          break;
-        case 5:
-          console.log('Sad')
-          detected_emo='Sad'
-          break;
-        case 6:
-          console.log('Surprised')
-          detected_emo='Surprised'
-          break;
-        default:
-          console.log('Detect again')
-          detected_emo='Detect again'
-      }
-
+    const avg = exp_prob.map((x) => x / count);
+    console.log(avg);
+    const exp_index = indexOfMax(avg);
+    switch (exp_index) {
+      case 0:
+        console.log("Angry");
+        detected_emo = "Angry";
+        break;
+      case 1:
+        console.log("Disgusted");
+        detected_emo = "Disgusted";
+        break;
+      case 2:
+        console.log("fearful");
+        detected_emo = "fearful";
+        break;
+      case 3:
+        console.log("Happy");
+        detected_emo = "Happy";
+        break;
+      case 4:
+        console.log("Neutral");
+        detected_emo = "Neutral";
+        console.log(info)
+        info.innerHTML="You seem bleh";
+        break;
+      case 5:
+        console.log("Sad");
+        detected_emo = "Sad";
+        break;
+      case 6:
+        console.log("Surprised");
+        detected_emo = "Surprised";
+        break;
+      default:
+        console.log("Detect again");
+        detected_emo = "Detect again";
+    }
   }, 3000);
 });

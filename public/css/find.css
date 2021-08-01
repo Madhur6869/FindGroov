@@ -42,6 +42,11 @@
   border-radius: 30px;
   cursor: pointer;
 }
+.button:hover{
+  border-color: #121212;
+  background-color: black ;
+  color: white;
+}
 .wave {
   position: absolute;
   top: 100vh;
