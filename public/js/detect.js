@@ -64,13 +64,13 @@ video.addEventListener("play", async () => {
       displaySize
     );
     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-    faceapi.draw.drawDetections(canvas, resizedDetections);
+  /*  faceapi.draw.drawDetections(canvas, resizedDetections);
     faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
-    faceapi.draw.drawFaceExpressions(canvas, resizedDetections);
+    faceapi.draw.drawFaceExpressions(canvas, resizedDetections); */
     // console.log('detections:',detections)
 
     if (detections) {
-      const exp = detections[0].expressions;     
+      const exp = detections[0].expressions;
       exp_prob[0]= exp.angry;
       exp_prob[1]= exp.disgusted;
       exp_prob[2]= exp.fearful;
@@ -119,7 +119,6 @@ video.addEventListener("play", async () => {
           console.log('Detect again')
           detected_emo='Detect again'
       }
-      
+
   }, 3000);
 });
-
